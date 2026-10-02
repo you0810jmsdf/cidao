@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import { freefreeCategoryLabel, freefreePosterKindMeta, resolveFreefreePosterKind } from '@/lib/freefree-categories'
+import OpenpoiAttribution from '../_components/OpenpoiAttribution'
 import { likeFreefree, commentFreefree, useCoupon } from '../actions'
 
 export default async function FreefreeDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -79,6 +80,9 @@ export default async function FreefreeDetailPage({ params }: { params: Promise<{
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${posterMeta.badgeClass}`}>{posterMeta.badge}</span>
             <span className="text-xs text-slate-500">{freefreeCategoryLabel(post.category)}</span>
+            {post.import_source === 'openpoi' && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300">📥 公開データ由来</span>
+            )}
           </div>
           <h1 className="text-3xl font-serif font-bold">{post.title}</h1>
           {orgInfo && <p className="text-sm text-slate-600 dark:text-slate-400">by {orgInfo.name}</p>}
@@ -99,6 +103,10 @@ export default async function FreefreeDetailPage({ params }: { params: Promise<{
         <div className="bg-white dark:bg-slate-900 border rounded-lg p-6">
           <p className="whitespace-pre-wrap">{post.body}</p>
         </div>
+
+        {post.import_source === 'openpoi' && (
+          <OpenpoiAttribution licenses={post.import_licenses} attributions={post.import_attributions} />
+        )}
 
         {Array.isArray(post.links) && post.links.length > 0 && (
           <section className="bg-white dark:bg-slate-900 border rounded-lg p-6 space-y-2">
