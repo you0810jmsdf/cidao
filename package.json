@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test src/lib/__tests__/*.test.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.106.0",

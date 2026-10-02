@@ -105,6 +105,10 @@ export default async function AdminFreefreePage() {
             <strong className="font-medium">「非公開にする」は元に戻せます。</strong>
             まず非公開にして様子を見るのが安全です。
           </p>
+          <p className="text-sm mt-2">
+            <Link href="/admin/freefree/openpoi" className="text-sky-700 dark:text-sky-400 underline">📥 OpenPOIインポート管理</Link>
+            <span className="text-slate-500">（地域の店舗・施設を確認してから一括登録）</span>
+          </p>
         </header>
 
         {postsError && (
